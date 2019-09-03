@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- bootstrap overrides -->
+    <link href="resources/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700|Just+Another+Hand&display=swap" rel="stylesheet">
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+
+    #map {
+        height: 50%;
+        width: 80%;
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg pink sticky-top">
+            <div class="d-lg-flex d-block flex-row mx-lg-auto mx-0">
+                <a class="navbar-brand text-dark justNav" href="index.php"><small>Travel Blog</small></a>
+                <button class="btn btn-sm" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="d-lg-none navbar-toggler-icon fa fa-angle-double-down"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item active">
+                            <a class="nav-link text-dark" href="index.php"><small>Home <span class="sr-only">(current)</span></small></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="eateries.php"><small>Restaurant</small></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="events.php"><small>Events</small></a>
+                        </li>
+                        <li><a class="navbar-brand text-dark ml-lg-4" href="maps.html"><small><i class="fa  fa-map-marker"></small></i></a>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="title d-flex justify-content-center py-5">
+            <h2 class="display-6 just"><span>See where I have been</span></h2>
+        </div>
+
+            <div id="map"></div>
+   
+        <script>
+        function initMap() {
+
+            var london = { lat: 51.501491, lng: -0.141429 };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 4,
+                center: london
+
+            });
+
+            var request;
+
+            request = $.ajax({
+                url: "actions/map_queries.php",
+                type: "post",
+                dataType: "json",
+                success: function(JSONObject) {
+                    for (var key in JSONObject) {
+                        if (JSONObject.hasOwnProperty(key)) {
+                            var coordinate = { lat: JSON.parse(JSONObject[key]["lat"]), lng: JSON.parse(JSONObject[key]["lng"]) };
+                            var title = JSONObject[key]["address"];
+                            var marker = new google.maps.Marker({
+                                position: coordinate,
+                                map: map,
+                                title: title
+                            });
+                        }
+                    }
+                }
+            });
+
+        }
+        </script>
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtjaD-saUZQ47PbxigOg25cvuO6_SuX3M&callback=initMap" async defer></script>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+/* Bootstrap Overrides */
+.jumbotron {
+    color: white;
+    background-image: url("../img/moher.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 60vh;
+}
+
+.jumbotron:hover {
+    cursor: pointer;
+}
+
+/* Titles */
+
+.amatic {
+    font-family: 'Amatic SC', sans-serif;
+    font-size: 9rem;
+}
+
+.just {
+    font-family: 'Just Another Hand', sans-serif;
+    font-size: 5rem;
+}
+
+/* Lines */
+h2 {
+    width: 100%;
+    text-align: center;
+    border-bottom: 0.1rem solid #000;
+    line-height: 0.1em !important;
+    margin: 1.6rem 0 1.25rem;
+}
+
+h2 span {
+    background: #fff;
+    padding: 0 1.6rem;
+}
+
+/* Background colors */
+
+
+
+
+/* card */
+
+.card-img-top:hover {
+    background-color: #f9ecec;
+    opacity: 0.9;
+    transition: 0.5s;
+}
+
+.card:hover {
+    cursor: pointer;
+}
+
+.card-link:hover {
+    color: #e2b5b6;
+    transition: 0.5s;
+}
+
+/* Text Colors */
+
+.lightpink-text {
+    color: #f9ecec;
+}
+
+.pink-text {
+    color: #f0d9da;
+}
+
+.darkpink-text {
+    color: #e9c7c8;
+}
+
+.darkerpink {
+    color: #e2b5b6;
+}
+
+
+/* extra media queries */
+
+@media (max-width: 1200px) {
+    .amatic {
+        font-size: 5rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .amatic {
+        font-size: 3rem;
+    }
+
+}
